@@ -95,20 +95,76 @@ function Navbar({ searchResults, setSearchResults, setIsLoading }) {
   )
 }
 
-function Box({ list, Component, boxTitle, isLoading, setClickedMovie=null}) {
+// function Box({ list, Component, boxTitle, isLoading, setClickedMovie=null}) {
+//   return (
+//     <div className={`box box-${boxTitle}`}>
+//     {isLoading===true? <p className='loading-para'>Loading</p>:
+//       <>
+//       {boxTitle==='watchedMovies'? (<div className='watchedMovies-overview'>overview</div>)}
+//       list?.map(listElement => {
+//         return (<Component listElement={listElement} setClickedMovie={setClickedMovie} />)
+//       })
+//       </>
+//       }
+//     </div>
+//   )
+// }
+
+
+function Box({ list, Component, boxTitle, isLoading, setClickedMovie = null }) {
+  console.log(list)
   return (
     <div className={`box box-${boxTitle}`}>
-    {isLoading===true? <p className='loading-para'>Loading</p>:
-      list?.map(listElement => {
-        return (<Component listElement={listElement} setClickedMovie={boxTitle==="searchResults"? setClickedMovie: null} />)
-      })}
+      {isLoading === true ? (
+        <p className='loading-para'>Loading</p>
+      ) : (
+        <>
+          {boxTitle === 'watchedMovies' && (
+            <div className='watchedMovies-overview'>
+              <h3>Movies You Watched</h3>
+              <div className='overview-details'>
+                <div>
+                  <p>#️⃣</p>
+                  <p>{list.length}</p>
+                </div>
+                <div>
+                  <p>⭐</p>
+                  <p>{list.reduce((acc, curr) => acc+parseFloat(curr.imdbRating),0)}</p>
+                </div>
+                <div>
+                  <p>🌟</p>
+                  <p>{list.reduce((acc, curr) => acc+parseFloat(curr.userRating),0)}</p>
+                </div>
+                <div>
+                  <p>⏳</p>
+                  <p>{list.reduce((acc, curr) => acc+parseFloat(curr.Runtime),0)} min</p>
+                </div>
+              </div>
+            </div>
+          )}
+          {list?.map(listElement => (
+            <Component
+              key={listElement.id} // Ensure to include a unique key for each mapped element
+              listElement={listElement}
+              setClickedMovie={setClickedMovie}
+            />
+          ))}
+        </>
+      )}
     </div>
-  )
+  );
 }
 
-function WatchedMovie({ listElement }) {
+
+function WatchedMovie({ listElement, setClickedMovie,setIsHidden }) {
+  console.log(listElement)
+  /*onClick={setClickedMovie(list)}*/
+  function handleClick () {
+    // setIsHidden(()=>!isHidden)
+    setClickedMovie(listElement.imdbID)
+  }
   return (
-    <div className='watchedMovie movie'>
+    <div className='watchedMovie movie' onClick={handleClick} >
       <img src={listElement.Poster} />
       <div className='watchedMovie-details movie-details'>
         <h2 className='watchedMovie-title'> {listElement.Title}</h2>
@@ -143,7 +199,7 @@ function MoviePort ({movie, ratedMovies, setRatedMovies, clickedMovie, setClicke
   }
 
   function handleMinimize () {
-    setIsHidden(()=>!isHidden)
+    setIsHidden(true)
     setClickedMovie(null)
   }
 
@@ -161,10 +217,10 @@ function MoviePort ({movie, ratedMovies, setRatedMovies, clickedMovie, setClicke
           </div>
         </div>
         <div className='body-div'>
-          {foundRatedMovie? (<p>You rated this movie {foundRatedMovie.userRating} ⭐🌟</p>) : <StarRating maxRating={10} movie={movie} array={ratedMovies} setArray={setRatedMovies}/>}
-          <p>{movie.Plot}</p>
-          <p>starring {movie.Actors}</p>
-          <p>directed by {movie.Director}</p>
+          {foundRatedMovie? (<p style={{margin:"auto"}}>You rated this movie <strong>{foundRatedMovie.userRating}</strong> ⭐🌟</p>) : <StarRating maxRating={10} movie={movie} array={ratedMovies} setArray={setRatedMovies}/>}
+          <p><strong>Plot</strong> {movie.Plot}</p>
+          <p><strong>starring</strong> {movie.Actors}</p>
+          <p><strong>directed by</strong> {movie.Director}</p>
         </div>
       </div>
     </div>
@@ -192,7 +248,7 @@ function App() {
       <div className='main'>
         {/* <Box list={tempMovieData} Component={FoundMovie} boxTitle="searchResults"/>  */}
         <Box list={searchResults} Component={FoundMovie} boxTitle="searchResults" isLoading={isLoading} setClickedMovie={setMoviePort}/> { /* Found Movies Box */}
-        {clickedMovie ===null ? <Box list={ratedMovies} Component={WatchedMovie} boxTitle="watchedMovies" isLoading={false} />:<MoviePort movie={clickedMovie} ratedMovies={ratedMovies} setRatedMovies={setRatedMovies} clickedMovie={clickedMovie} setClickedMovie={setClickedMovie}/> }
+        {clickedMovie ===null ? <Box list={ratedMovies} Component={WatchedMovie} boxTitle="watchedMovies" isLoading={false} setClickedMovie={setMoviePort} />:<MoviePort movie={clickedMovie} ratedMovies={ratedMovies} setRatedMovies={setRatedMovies} clickedMovie={clickedMovie} setClickedMovie={setClickedMovie}/> }
       </div>
     </div>
   )

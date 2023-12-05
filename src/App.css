@@ -1,10 +1,13 @@
 #root {
-margin: 0px;
-padding: 0px;
-height: 100%;
-width: 100%;
-padding-inline: 1%;
-overflow-x: hidden;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  width: 100%;
+  /* padding-inline: 3%; */
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
@@ -143,7 +146,7 @@ overflow-x: hidden;
   display: grid;
   gap: 10px;
   grid-template-columns: 2fr 3fr;
-  height: 69vh;
+  height: 80vh;
   width: 100%;
   margin: 0px;
 }
@@ -161,9 +164,10 @@ overflow-x: hidden;
 .app * {}
 
 body {
+  overflow: hidden;
   padding-top: 2%;
   height: 105vh;
-  width: 98vw;
+  width: 100vw;
   background-color: #212529;
   margin: 0;
   padding: 0;
@@ -181,9 +185,22 @@ body {
 }
 
 .Navbar input {
-  width: 50%;
-  height: 30%;
+  width: 40%;
+  height: 40%;
   border-radius: 10px;
+  padding: 2%;
+  color: #dee2e6;
+  font-size: 1.3rem;
+  background-color: #7950f2;
+  border: 0px
+}
+
+.Navbar input :focus {
+  outline: none;
+}
+
+.mainLoginInput::-webkit-input-placeholder {
+
 }
 
 .Navbar input&.active {
@@ -242,4 +259,36 @@ body {
   top: 2%;
   border-radius: 50%;
   text-align: center;
+}
+
+.watchedMovies-overview{
+  height: 27%;
+  width: 34%;
+  border-radius: 80%;
+  margin: auto;
+  margin-top: 1%;
+  padding-inline: 20%;
+  background-color: #343a40;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 13%;
+}
+
+.watchedMovies-overview * {
+  color: white;
+  margin: 0px;
+}
+
+.overview-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.body-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-inline: 5%;
+  padding-top: 3%;
 }
