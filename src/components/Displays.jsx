@@ -58,7 +58,7 @@ function Box({ list, Component, boxTitle, isLoading, setClickedMovie = null }) {
                   </div>
                   <div>
                     <p>⭐</p>
-                    <p>{list.reduce((acc, curr) => acc+parseFloat(curr.imdbRating),0)}</p>
+                    <p>{list.reduce((acc, curr) => acc+parseFloat(curr.imdbRating),0).toFixed(2)}</p>
                   </div>
                   <div>
                     <p>🌟</p>

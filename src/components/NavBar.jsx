@@ -9,8 +9,20 @@ function Searchbar({ setSearchResults, setIsLoading }) {
       let searchResArr
       fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=94a55c5a&s=${e.target.value}`).then(data => data.json()).then(res => {
         console.log(res);
-        setSearchResults(res.Search);
-        setIsLoading(()=>false)
+        if (res.Response=="False") {
+          console.error  (new Error(`fetch not working ${res.Error}`))
+          setSearchResults([{
+            Poster:null,
+            imdbID: null,
+            Title: `Error during fetching \n error: ${res.Error}`,
+            Year: null
+          }]);
+          setIsLoading(()=>false)
+        }
+        else {console.log(`success.. res is `, res)
+          setSearchResults(res.Search);
+          setIsLoading(()=>false)
+        }
         return res.Search
       })
   
