@@ -13,6 +13,9 @@ function App() {
   const [ratedMovies, setRatedMovies] = useState([])
   console.log(ratedMovies)
 
+  useEffect(function () {
+    document.title= clickedMovie?.Title || "usePopCorn" 
+  }, [clickedMovie])
   async function setMoviePort (id) {
     let fetchedMovie
     await fetch(`http://www.omdbapi.com/?i=${id}&apikey=94a55c5a`).then(data => data.json()).then(res => {

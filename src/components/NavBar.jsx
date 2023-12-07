@@ -34,7 +34,7 @@ function Searchbar({ setSearchResults, setIsLoading }) {
   }
   
   function Logo() {
-    return (<div className='logo'>
+    return (<div className='logo' onClick={() => window.location.reload()} >
       <h1>🍿</h1>
       <h2>usePopCorn</h2>
     </div>)
