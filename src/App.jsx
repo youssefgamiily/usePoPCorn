@@ -16,6 +16,15 @@ function App() {
   useEffect(function () {
     document.title= clickedMovie?.Title || "usePopCorn" 
   }, [clickedMovie])
+
+  useEffect (function () {
+    let ratedMoviesFromStorage = JSON.parse(localStorage.getItem("ratedMovies"));
+    console.log("ratedMoviesFromStorage is: ", ratedMoviesFromStorage)
+    if ( (ratedMoviesFromStorage) !== null ) {
+      console.log (ratedMoviesFromStorage)
+      setRatedMovies(ratedMoviesFromStorage)
+    }
+  }, [])
   async function setMoviePort (id) {
     let fetchedMovie
     await fetch(`http://www.omdbapi.com/?i=${id}&apikey=94a55c5a`).then(data => data.json()).then(res => {

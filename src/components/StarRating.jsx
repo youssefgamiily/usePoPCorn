@@ -36,6 +36,8 @@ export default function StarRating ({maxRating, movie, array, setArray}) {
             movieClone.userRating=clickedStar
             console.log(movie)
             setArray([...array, movieClone])
+            localStorage.setItem("ratedMovies", JSON.stringify([...array, movieClone]) )
+            console.log("stringify([...array, movieClone]) is: ", JSON.stringify([...array, movieClone]))
         }
     })()
     return <div className='rating'>
