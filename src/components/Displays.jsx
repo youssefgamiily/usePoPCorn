@@ -40,7 +40,7 @@ export default function MoviePort ({movie, ratedMovies, setRatedMovies, clickedM
     )
 }
 
-function Box({ list, Component, boxTitle, isLoading, setClickedMovie = null }) {
+function Box({ list, Component, boxTitle, isLoading, setClickedMovie = null, setList }) {
     console.log(list)
     return (
       <div className={`box box-${boxTitle}`}>
@@ -76,6 +76,8 @@ function Box({ list, Component, boxTitle, isLoading, setClickedMovie = null }) {
                 key={listElement.id} // Ensure to include a unique key for each mapped element
                 listElement={listElement}
                 setClickedMovie={setClickedMovie}
+                ratedMovies = {list}
+                setRatedMovies = {setList}
               />
             ))}
           </>

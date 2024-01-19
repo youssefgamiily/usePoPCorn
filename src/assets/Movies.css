@@ -1,0 +1,11 @@
+.deleteButton {
+    color: black;
+    position: relative;
+    left: 80%;
+    bottom: 10%;
+    width: 7vw;
+}
+
+watchedMovie-details {
+    height: 100%;
+}

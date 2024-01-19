@@ -39,8 +39,8 @@ function App() {
       <Navbar searchResults={searchResults} setSearchResults={setSearchResults} setIsLoading={setIsLoading} />
       <div className='main'>
         {/* <Box list={tempMovieData} Component={FoundMovie} boxTitle="searchResults"/>  */}
-        <Box list={searchResults} Component={FoundMovie} boxTitle="searchResults" isLoading={isLoading} setClickedMovie={setMoviePort}/> { /* Found Movies Box */}
-        {clickedMovie ===null ? <Box list={ratedMovies} Component={WatchedMovie} boxTitle="watchedMovies" isLoading={false} setClickedMovie={setMoviePort} />:<MoviePort movie={clickedMovie} ratedMovies={ratedMovies} setRatedMovies={setRatedMovies} clickedMovie={clickedMovie} setClickedMovie={setClickedMovie}/> }
+        <Box list={searchResults} Component={FoundMovie} boxTitle="searchResults" isLoading={isLoading} setClickedMovie={setMoviePort} setList={setSearchResults}/> { /* Found Movies Box */}
+        {clickedMovie ===null ? <Box list={ratedMovies} Component={WatchedMovie} boxTitle="watchedMovies" isLoading={false} setClickedMovie={setMoviePort} setList={setRatedMovies}/>:<MoviePort movie={clickedMovie} ratedMovies={ratedMovies} setRatedMovies={setRatedMovies} clickedMovie={clickedMovie} setClickedMovie={setClickedMovie}/> }
       </div>
     </div>
   )

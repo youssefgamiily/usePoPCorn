@@ -1,14 +1,25 @@
 import { useEffect, useState } from 'react'
+import '../assets/Movies.css'
 
-function WatchedMovie({ listElement, setClickedMovie,setIsHidden }) {
+function WatchedMovie({ listElement, setClickedMovie,setIsHidden, ratedMovies, setRatedMovies }) {
     console.log(listElement)
     /*onClick={setClickedMovie(list)}*/
     function handleClick () {
       // setIsHidden(()=>!isHidden)
       setClickedMovie(listElement.imdbID)
     }
+    function deleteMovie (imdbID) {
+      console.log("ratedMovies is: ", ratedMovies)
+      let newRatedMovies = ratedMovies.filter((movie) => movie.imdbID !== imdbID)
+      localStorage.setItem("ratedMovies", JSON.stringify(newRatedMovies) )
+      setRatedMovies(newRatedMovies)
+      
+      console.log("ratedMovies is: ", ratedMovies)
+
+    }
     return (
-      <div className='watchedMovie movie' onClick={handleClick} >
+      <div className='watchedMovie movie' onClick={(e) => {
+        if(e.target.className !== 'deleteButton') return handleClick}} >
         <img src={listElement.Poster} />
         <div className='watchedMovie-details movie-details'>
           <h2 className='watchedMovie-title'> {listElement.Title}</h2>
@@ -17,6 +28,7 @@ function WatchedMovie({ listElement, setClickedMovie,setIsHidden }) {
             <p className='user-rating'>🌟 {listElement.userRating}</p>
             <p className='movie-duration'>⏳ {listElement.Runtime}</p>
           </div>
+          <button className='deleteButton' onClick={() => deleteMovie(listElement.imdbID)}>Delete</button>
         </div>
       </div>
     )
