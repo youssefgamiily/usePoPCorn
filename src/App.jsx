@@ -27,7 +27,7 @@ function App() {
   }, [])
   async function setMoviePort (id) {
     let fetchedMovie
-    await fetch(`http://www.omdbapi.com/?i=${id}&apikey=94a55c5a`).then(data => data.json()).then(res => {
+    await fetch(`https://www.omdbapi.com/?i=${id}&apikey=94a55c5a`).then(data => data.json()).then(res => {
       console.log(res);
       setClickedMovie(res)
       console.log("clickedMovieState is now: ",clickedMovie)
